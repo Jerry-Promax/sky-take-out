@@ -5,17 +5,17 @@
     <select id="list" resultType="com.sky.entity.ShoppingCart">
         select * from shopping_cart
             <where>
-                <if test="userId != NULL">
+                <if test="userId != null">
                     and user_id = #{userId}
                 </if>
-                <if test="setmealId != NULL">
+                <if test="setmealId != null">
                     and setmeal_id = #{setmealId}
                 </if>
-                <if test="dishId != NULL">
+                <if test="dishId != null">
                     and dish_id = #{dishId}
                 </if>
-                <if test="dishFalvour != NULL">
-                and dish_flavour = #{dishFalvour}
+                <if test="dishFlavor != null">
+                and dish_flavour = #{dishFlavor}
                 </if>
             </where>
     </select>
