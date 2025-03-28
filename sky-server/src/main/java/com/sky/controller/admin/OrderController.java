@@ -27,7 +27,10 @@ public class OrderController {
      * @return
      */
     @GetMapping("/conditionSearch")
-    public Result<PageResult> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO){
+    public Result<PageResult> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO,
+                                              @RequestParam("pageSize") int pageSize1,
+                                              int page){
+        log.info("页数和页数大小:{},{}",page,pageSize1);
         log.info("传进来的参数为：{}",ordersPageQueryDTO);
         PageResult pageResult = orderService.conditionSearch(ordersPageQueryDTO);
         return Result.success(pageResult);
