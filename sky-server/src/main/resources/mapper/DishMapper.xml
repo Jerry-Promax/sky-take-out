@@ -67,4 +67,16 @@
         </where>
         order by create_time desc
     </select>
+
+    <select id="getmealBymap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="endTime !=null">
+                and create_time &lt; #{endTime}
+            </if>
+            <if test="status !=null">
+                and status=#{status}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.sky.mapper;
 
 import com.github.pagehelper.Page;
+import com.sky.dto.GoodsSalesDTO;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -64,4 +66,27 @@ public interface OrderMapper {
      */
     @Select("SELECT * FROM orders where status = #{status} and order_time < #{orderTime}")
     List<Orders> getByStatusAndOrderTimeLT(Integer status, LocalDateTime orderTime);
+
+    /*
+   根据时间段和订单状态计算总金额
+    */
+    Double sumByMap(Map map);
+    /*
+    订单统计量
+     */
+    Integer countBymap(Map map);
+    /*
+    统计销售量
+     */
+    List<GoodsSalesDTO> getByTime(LocalDateTime beginTime, LocalDateTime endTime);
+    /*
+    今天的有效订单数
+     */
+    @Select("select count(id) from orders where order_time > #{beginTime} and order_time < #{endTime} and status=#{status} ")
+    Integer TodayVailOrders(Map map);
+    /*
+    获得今天下单成功的用户
+     */
+    @Select("select count(user_id) from orders where order_time > #{beginTime} and order_time < #{endTime} and status=5")
+    Integer getSuccess(LocalDateTime beginTime, LocalDateTime endTime);
 }

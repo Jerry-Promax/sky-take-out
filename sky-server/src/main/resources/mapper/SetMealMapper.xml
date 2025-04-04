@@ -67,4 +67,16 @@
             </if>
         </where>
     </select>
+
+    <select id="getmealBymap" resultType="java.lang.Integer">
+        select count(id) from setmeal
+        <where>
+            <if test="endTime !=null">
+                and create_time &lt; #{endTime}
+            </if>
+            <if test="status !=null">
+                and status=#{status}
+            </if>
+        </where>
+    </select>
 </mapper>
